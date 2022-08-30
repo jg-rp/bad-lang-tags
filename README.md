@@ -20,7 +20,7 @@ Other notable "features":
 
 `find_bad_lang_tags.py` uses [requests](https://requests.readthedocs.io/en/latest/) and [pygments](https://pygments.org/). To run `find_bad_lang_tags.py`, you can do the following (a copy and paste and other Python package managers would work equally as well.)
 
-Make sure you have [Python => 3.7 installed](https://www.python.org/downloads/), then clone this repository.
+Make sure you have [Python >= 3.7 installed](https://www.python.org/downloads/), then clone this repository.
 
 ```bash
 git clone https://github.com/jg-rp/bad-lang-tags.git
@@ -67,7 +67,7 @@ You must specify either a Rosetta Code [namespace](https://www.mediawiki.org/wik
 
 ### Target a namespace
 
-The example targets task _talk_ pages, stops after it has scanned 50 pages, does not report unsupported `lang` attributes and writes CSV data to `talk.csv` in the current working directory.
+This example targets task _talk_ pages, stops after it has scanned 50 pages, does not report unsupported `lang` attributes and writes CSV data to `talk.csv` in the current working directory.
 
 ```bash
 python find_bad_lang_tags.py --namespace=1 --page-limit=50 --skip_unsupported_langs -o talk.csv
