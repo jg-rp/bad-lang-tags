@@ -13,6 +13,8 @@ Other notable "features":
 - Report `<syntaxhighlight>` tags without a `lang` attribute.
 - Optionally report unsupported `lang` attributes inside `<syntaxhighlight>` tags.
 - Include revision data and _bad tag_ indices in output CSV.
+- Target specific namespaces like "talk" or "user" pages.
+- Target specific categories like "Draft Programming Tasks"
 
 ## Install
 
