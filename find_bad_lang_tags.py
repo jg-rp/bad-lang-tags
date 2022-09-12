@@ -183,11 +183,12 @@ def ap_query(
         params["gapcontinue"] = data["continue"]["gapcontinue"]
         params["continue"] = data["continue"]["continue"]
         logging.debug("continue from %s", params["gapcontinue"])
+        stop = False
+    else:
+        stop = True
 
     page_count += len(data["query"]["pages"])
     yield from data["query"]["pages"]
-
-    stop = False
 
     while page_count < limit and not stop:
         response = session.get(url, params=params)
