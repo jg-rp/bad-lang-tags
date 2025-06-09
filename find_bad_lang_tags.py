@@ -22,7 +22,9 @@ from pygments import lexers
 logging.basicConfig(level=logging.DEBUG)
 
 
-ALL_LEXERS = set(itertools.chain.from_iterable(l[1] for l in lexers.get_all_lexers()))
+ALL_LEXERS = set(
+    itertools.chain.from_iterable(lexer[1] for lexer in lexers.get_all_lexers())
+)
 
 
 AP_QUERY: Dict[str, Any] = {
@@ -442,6 +444,7 @@ def get_session() -> requests.Session:
     )
     adapter = HTTPAdapter(max_retries=retry_strategy)
     session = requests.Session()
+    session.headers.update({"User-Agent": "Find bad lang tags bot"})
     session.mount("https://", adapter)
     session.mount("http://", adapter)
     return session
@@ -475,9 +478,12 @@ def cm_find_bad_lang_tags(
             logging.error(f"can't handle format {content_format} for '{page}'")
             sys.exit(1)
 
-        yield page, find_bad_lang_tags(
-            page["revisions"][0]["slots"]["main"]["content"],
-            skip_unsupported_langs,
+        yield (
+            page,
+            find_bad_lang_tags(
+                page["revisions"][0]["slots"]["main"]["content"],
+                skip_unsupported_langs,
+            ),
         )
 
 
@@ -512,9 +518,12 @@ def ap_find_bad_lang_tags(
             logging.error(f"can't handle format {content_format} for '{page}'")
             sys.exit(1)
 
-        yield page, find_bad_lang_tags(
-            page["revisions"][0]["slots"]["main"]["content"],
-            skip_unsupported_langs,
+        yield (
+            page,
+            find_bad_lang_tags(
+                page["revisions"][0]["slots"]["main"]["content"],
+                skip_unsupported_langs,
+            ),
         )
 
 
